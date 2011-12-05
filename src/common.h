@@ -2,6 +2,7 @@
  * Copyright (C) 2003 Maxim Stepin ( maxst@hiend3d.com )
  *
  * Copyright (C) 2010 Cameron Zemek ( grom@zeminvaders.net)
+ * Copyright (C) 2011 Francois Gannaz <mytskine@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,9 +25,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#define MASK_2 0x00FF00
-#define MASK_13 0xFF00FF
-#define MASK_RGB 0x00FFFFFF
+#define MASK_2     0x0000FF00
+#define MASK_13    0x00FF00FF
+#define MASK_RGB   0x00FFFFFF
+#define MASK_ALPHA 0xFF000000
 
 #define Ymask 0x00FF0000
 #define Umask 0x0000FF00
@@ -61,13 +63,17 @@ static inline uint32_t Interpolate_2(uint32_t c1, int w1, uint32_t c2, int w2, i
     if (c1 == c2) {
         return c1;
     }
-    return ((((c1 & MASK_2) * w1 + (c2 & MASK_2) * w2) >> s) & MASK_2)	+
+    return
+        (((((c1 & MASK_ALPHA) >> 24) * w1 + ((c2 & MASK_ALPHA) >> 24) * w2) << (24-s)) & MASK_ALPHA) +
+        ((((c1 & MASK_2) * w1 + (c2 & MASK_2) * w2) >> s) & MASK_2)	+
         ((((c1 & MASK_13) * w1 + (c2 & MASK_13) * w2) >> s) & MASK_13);
 }
 
 static inline uint32_t Interpolate_3(uint32_t c1, int w1, uint32_t c2, int w2, uint32_t c3, int w3, int s)
 {
-    return ((((c1 & MASK_2) * w1 + (c2 & MASK_2) * w2 + (c3 & MASK_2) * w3) >> s) & MASK_2) +
+    return
+        (((((c1 & MASK_ALPHA) >> 24) * w1 + ((c2 & MASK_ALPHA) >> 24) * w2 + ((c3 & MASK_ALPHA) >> 24) * w3) << (24-s)) & MASK_ALPHA) +
+        ((((c1 & MASK_2) * w1 + (c2 & MASK_2) * w2 + (c3 & MASK_2) * w3) >> s) & MASK_2) +
         ((((c1 & MASK_13) * w1 + (c2 & MASK_13) * w2 + (c3 & MASK_13) * w3) >> s) & MASK_13);
 }
 

@@ -122,7 +122,7 @@ error_usage:
     free(destData);
 
     // Save image
-    ilConvertImage(IL_BGR, IL_UNSIGNED_BYTE); // No alpha channel
+    ilConvertImage(IL_BGRA, IL_UNSIGNED_BYTE); // No alpha channel
     ilHint(IL_COMPRESSION_HINT, IL_USE_COMPRESSION);
     ilEnable(IL_FILE_OVERWRITE);
     ILboolean saved = ilSaveImage(szFilenameOut);

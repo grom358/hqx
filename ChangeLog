@@ -8,3 +8,6 @@
     * Thanks for this change go to anbaricforce
     * hqx.h: Added declarations for row byte versions
     * hq*x.c: Added version of function that takes row bytes
+
+2011-12-05 Cameron Zemek <grom@zeminvaders.net>, Francois Gannaz <mytskine@gmail.com>
+    * Added transparency support
