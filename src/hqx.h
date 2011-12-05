@@ -21,6 +21,8 @@
 #ifndef __HQX_H_
 #define __HQX_H_
 
+#include <stdint.h>
+
 #if defined( __GNUC__ )
     #ifdef __MINGW32__
         #define HQX_CALLCONV __stdcall
