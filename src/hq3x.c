@@ -76,12 +76,15 @@
 #define PIXEL22_5   Interp5(dp+dpL+dpL+2, w[6], w[8]);
 #define PIXEL22_C   *(dp+dpL+dpL+2) = w[5];
 
-HQX_API void HQX_CALLCONV hq3x_32( uint32_t * sp, uint32_t * dp, int Xres, int Yres )
+HQX_API void HQX_CALLCONV hq3x_32_rb( uint32_t * sp, uint32_t srb, uint32_t * dp, uint32_t drb, int Xres, int Yres )
 {
     int  i, j, k;
     int  prevline, nextline;
     uint32_t  w[10];
-    int dpL = Xres * 3;
+    int dpL = (drb >> 2);
+    int spL = (srb >> 2);
+    uint8_t *sRowP = (uint8_t *) sp;
+    uint8_t *dRowP = (uint8_t *) dp;
 
     //   +----+----+----+
     //   |    |    |    |
@@ -96,8 +99,8 @@ HQX_API void HQX_CALLCONV hq3x_32( uint32_t * sp, uint32_t * dp, int Xres, int Y
 
     for (j=0; j<Yres; j++)
     {
-        if (j>0)      prevline = -Xres; else prevline = 0;
-        if (j<Yres-1) nextline =  Xres; else nextline = 0;
+        if (j>0)      prevline = -spL; else prevline = 0;
+        if (j<Yres-1) nextline =  spL; else nextline = 0;
 
         for (i=0; i<Xres; i++)
         {
@@ -3769,6 +3772,17 @@ HQX_API void HQX_CALLCONV hq3x_32( uint32_t * sp, uint32_t * dp, int Xres, int Y
             sp++;
             dp += 3;
         }
-        dp += (dpL * 2);
+
+        sRowP += srb;
+        sp = (uint32_t *) sRowP;
+
+        dRowP += drb * 3;
+        dp = (uint32_t *) dRowP;
     }
+}
+
+HQX_API void HQX_CALLCONV hq3x_32( uint32_t * sp, uint32_t * dp, int Xres, int Yres )
+{
+    uint32_t rowBytesL = Xres * 4;
+    hq3x_32_rb(sp, rowBytesL, dp, rowBytesL * 3, Xres, Yres);
 }
