@@ -81,13 +81,6 @@ error_usage:
     // we get a RGB value due to little-endianness.
     ilCopyPixels(0, 0, 0, width, height, 1, IL_BGRA, IL_UNSIGNED_BYTE, srcData);
 
-    // Discard the alpha byte since the RGBtoYUV conversion
-    // expects the most significant byte to be empty
-    size_t i;
-    for (i = 3; i < srcSize; i += 4) {
-        srcData[i] = 0;
-    }
-
     uint32_t *sp = (uint32_t *) srcData;
     uint32_t *dp = (uint32_t *) destData;
 

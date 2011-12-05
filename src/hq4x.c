@@ -224,7 +224,7 @@ HQX_API void HQX_CALLCONV hq4x_32_rb( uint32_t * sp, uint32_t srb, uint32_t * dp
             int pattern = 0;
             int flag = 1;
 
-            YUV1 = RGBtoYUV[w[5]];
+            YUV1 = rgb_to_yuv(w[5]);
 
             for (k=1; k<=9; k++)
             {
@@ -232,7 +232,7 @@ HQX_API void HQX_CALLCONV hq4x_32_rb( uint32_t * sp, uint32_t srb, uint32_t * dp
 
                 if ( w[k] != w[5] )
                 {
-                    YUV2 = RGBtoYUV[w[k]];
+                    YUV2 = rgb_to_yuv(w[k]);
                     if ( ( abs((YUV1 & Ymask) - (YUV2 & Ymask)) > trY ) ||
                             ( abs((YUV1 & Umask) - (YUV2 & Umask)) > trU ) ||
                             ( abs((YUV1 & Vmask) - (YUV2 & Vmask)) > trV ) )
