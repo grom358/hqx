@@ -51,35 +51,35 @@ error_usage:
         return 1;
     }
 
-	ILuint handle, width, height;
+    ILuint handle, width, height;
 
     char *szFilenameIn = argv[optind];
     char *szFilenameOut = argv[optind + 1];
 
-	ilInit();
-	ilEnable(IL_ORIGIN_SET);
-	ilGenImages(1, &handle);
-	ilBindImage(handle);
+    ilInit();
+    ilEnable(IL_ORIGIN_SET);
+    ilGenImages(1, &handle);
+    ilBindImage(handle);
 
-	// Load image
-	ILboolean loaded = ilLoadImage(szFilenameIn);
+    // Load image
+    ILboolean loaded = ilLoadImage(szFilenameIn);
     if (loaded == IL_FALSE) {
         fprintf(stderr, "ERROR: can't load '%s'\n", szFilenameIn);
         return 1;
     }
-	width = ilGetInteger(IL_IMAGE_WIDTH);
-	height = ilGetInteger(IL_IMAGE_HEIGHT);
+    width = ilGetInteger(IL_IMAGE_WIDTH);
+    height = ilGetInteger(IL_IMAGE_HEIGHT);
 
-	// Allocate memory for image data
-	size_t srcSize = width * height * sizeof(uint32_t);
-	uint8_t *srcData = (uint8_t *) malloc(srcSize);
-	size_t destSize = width * scaleBy * height * scaleBy * sizeof(uint32_t);
-	uint8_t *destData = (uint8_t *) malloc(destSize);
+    // Allocate memory for image data
+    size_t srcSize = width * height * sizeof(uint32_t);
+    uint8_t *srcData = (uint8_t *) malloc(srcSize);
+    size_t destSize = width * scaleBy * height * scaleBy * sizeof(uint32_t);
+    uint8_t *destData = (uint8_t *) malloc(destSize);
 
-	// Init srcData from loaded image
+    // Init srcData from loaded image
     // We want the pixels in BGRA format so that when converting to uint32_t
     // we get a RGB value due to little-endianness.
-	ilCopyPixels(0, 0, 0, width, height, 1, IL_BGRA, IL_UNSIGNED_BYTE, srcData);
+    ilCopyPixels(0, 0, 0, width, height, 1, IL_BGRA, IL_UNSIGNED_BYTE, srcData);
 
     // Discard the alpha byte since the RGBtoYUV conversion
     // expects the most significant byte to be empty
@@ -121,18 +121,18 @@ error_usage:
     }
     #endif
 
-	// Copy destData into image
-	ilTexImage(width * scaleBy, height * scaleBy, 0, 4, IL_BGRA, IL_UNSIGNED_BYTE, destData);
+    // Copy destData into image
+    ilTexImage(width * scaleBy, height * scaleBy, 0, 4, IL_BGRA, IL_UNSIGNED_BYTE, destData);
 
     // Free image data
     free(srcData);
     free(destData);
 
     // Save image
-	ilConvertImage(IL_BGR, IL_UNSIGNED_BYTE); // No alpha channel
-	ilHint(IL_COMPRESSION_HINT, IL_USE_COMPRESSION);
+    ilConvertImage(IL_BGR, IL_UNSIGNED_BYTE); // No alpha channel
+    ilHint(IL_COMPRESSION_HINT, IL_USE_COMPRESSION);
     ilEnable(IL_FILE_OVERWRITE);
-	ILboolean saved = ilSaveImage(szFilenameOut);
+    ILboolean saved = ilSaveImage(szFilenameOut);
 
     ilDeleteImages(1, &handle);
 
