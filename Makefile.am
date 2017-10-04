@@ -1,5 +1,8 @@
 ACLOCAL_AMFLAGS = -I autoconf/m4
 
+pkgconfigdir = ${libdir}/pkgconfig
+pkgconfig_DATA = hqx.pc
+
 EXTRA_DIST = README.md
 
 bin_PROGRAMS = hqx

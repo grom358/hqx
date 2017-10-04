@@ -27,4 +27,5 @@ AS_IF([test "x$enable_debug" = "xyes"],
 
 AS_CASE([$host], [*cygwin*], [CFLAGS="$CFLAGS -mno-cygwin"])
 
-AC_OUTPUT([Makefile])
+AC_CONFIG_FILES([Makefile hqx.pc])
+AC_OUTPUT

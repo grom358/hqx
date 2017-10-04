@@ -8,6 +8,7 @@ aclocal.m4
 *.a
 *.la
 .dirstamp
+*.pc
 
 .deps
 .libs
