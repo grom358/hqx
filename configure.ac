@@ -6,6 +6,7 @@ AC_C_INLINE
 AC_C_BIGENDIAN
 AM_INIT_AUTOMAKE([-Wall -Werror])
 AM_PROG_CC_C_O
+AM_PROG_AR
 
 AC_CHECK_HEADER([IL/il.h],,AC_MSG_ERROR("DevIL il.h required"))
 
