@@ -6,10 +6,7 @@ hqx ("hq" stands for "high quality" and "x" stands for magnification) is one of 
 
 # Build
 
-    libtoolize
-    autoreconf
-    automake --add-missing
-    autoreconf
+    autoreconf -vi
 
 # Install
 NOTE: DevIL library and development headers are required.
