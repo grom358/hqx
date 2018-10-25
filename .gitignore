@@ -1,0 +1,32 @@
+# Ignore libtoolize artifacts
+ltmain.sh
+m4/
+
+# Ignore autoreconf artifacts
+aclocal.m4
+autom4te.cache/
+configure
+Makefile.in
+
+# Ignore automake --add-missing artifacts
+ar-lib
+compile
+config.guess
+config.sub
+install-sh
+missing
+depcomp
+
+# Ignore configure artifacts
+Makefile
+config.log
+config.status
+libtool
+.deps/
+
+# Ignore make artifacts
+*.o
+*.lo
+*.la
+.libs
+src/hqx
