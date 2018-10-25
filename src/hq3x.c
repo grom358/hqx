@@ -3782,6 +3782,6 @@ HQX_API void HQX_CALLCONV hq3x_32_rb( const uint32_t * sp, uint32_t srb, uint32_
 
 HQX_API void HQX_CALLCONV hq3x_32( const uint32_t * sp, uint32_t * dp, int Xres, int Yres )
 {
-    uint32_t rowBytesL = Xres * 4;
+    uint32_t rowBytesL = Xres * sizeof(uint32_t);
     hq3x_32_rb(sp, rowBytesL, dp, rowBytesL * 3, Xres, Yres);
 }
