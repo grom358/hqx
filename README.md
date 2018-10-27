@@ -9,7 +9,7 @@ hqx ("hq" stands for "high quality" and "x" stands for magnification) is one of 
     autoreconf -vi
 
 # Install
-NOTE: DevIL library and development headers are required.
+NOTE: [DevIL](http://openil.sf.net/) library and development headers are required.
 
     ./configure
     make && make install
