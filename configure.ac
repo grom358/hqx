@@ -23,7 +23,7 @@ AC_SUBST([HQX_LTVERSION])
 dnl Win32
 AS_CASE([$host],
         [*mingw32*], [PLATFORM="MINGW32"],
-        [*cygwin*], [CFLAGS="$CFLAGS -mno-cygwin" PLATFORM="CYGWIN"],
+        [*cygwin*], [PLATFORM="CYGWIN"],
         [*darwin*], [PLATFORM="OSX"])
 AC_SUBST([PLATFORM])
 
