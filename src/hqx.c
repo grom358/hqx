@@ -87,7 +87,7 @@ error_usage:
     // If big endian we have to swap the byte order to get RGB values
     #ifdef WORDS_BIGENDIAN
     uint32_t *spTemp = sp;
-    for (i = 0; i < srcSize >> 2; i++) {
+    for (size_t i = 0; i < srcSize >> 2; i++) {
         spTemp[i] = swapByteOrder(spTemp[i]);
     }
     #endif
@@ -109,7 +109,7 @@ error_usage:
     // If big endian we have to swap byte order of destData to get BGRA format
     #ifdef WORDS_BIGENDIAN
     uint32_t *dpTemp = dp;
-    for (i = 0; i < destSize >> 2; i++) {
+    for (size_t i = 0; i < destSize >> 2; i++) {
         dpTemp[i] = swapByteOrder(dpTemp[i]);
     }
     #endif
