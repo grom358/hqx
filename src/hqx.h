@@ -43,6 +43,10 @@
     #define HQX_API
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 HQX_API void HQX_CALLCONV hqxInit(void);
 HQX_API void HQX_CALLCONV hq2x_32( const uint32_t * src, uint32_t * dest, int width, int height );
 HQX_API void HQX_CALLCONV hq3x_32( const uint32_t * src, uint32_t * dest, int width, int height );
@@ -51,5 +55,9 @@ HQX_API void HQX_CALLCONV hq4x_32( const uint32_t * src, uint32_t * dest, int wi
 HQX_API void HQX_CALLCONV hq2x_32_rb( const uint32_t * src, uint32_t src_rowBytes, uint32_t * dest, uint32_t dest_rowBytes, int width, int height );
 HQX_API void HQX_CALLCONV hq3x_32_rb( const uint32_t * src, uint32_t src_rowBytes, uint32_t * dest, uint32_t dest_rowBytes, int width, int height );
 HQX_API void HQX_CALLCONV hq4x_32_rb( const uint32_t * src, uint32_t src_rowBytes, uint32_t * dest, uint32_t dest_rowBytes, int width, int height );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
