@@ -7,6 +7,7 @@ EXTRA_DIST = README.md
 
 bin_PROGRAMS = hqx
 lib_LTLIBRARIES = libhqx.la
+man_MANS = debian/hqx.1
 
 libhqx_la_SOURCES = \
   src/init.c \
